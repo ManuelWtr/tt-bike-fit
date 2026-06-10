@@ -106,15 +106,7 @@ export function App() {
   return (
     <div className="app">
       <header className="app-header">
-        <div className="app-header__brand">
-          <span className="app-header__logo" aria-hidden>
-            ⏱
-          </span>
-          <span>TT Bike Fit</span>
-        </div>
-        <div className="app-header__sub">
-          self-fitting · side-view photos · manual landmark placement
-        </div>
+        <div className="app-header__brand">TT Bike Fit</div>
         {store.storageWarning && (
           <button
             type="button"
@@ -122,7 +114,7 @@ export function App() {
             onClick={store.clearStorageWarning}
             title="Click to dismiss"
           >
-            ⚠ {store.storageWarning}
+            {store.storageWarning}
           </button>
         )}
       </header>
@@ -226,13 +218,59 @@ function EmptyState({
 }) {
   return (
     <div className="empty-state">
+      <h1 className="empty-state__title">Upload side-view photos to begin</h1>
+      <p className="empty-state__lead">
+        Accurate angles depend on a properly framed photo. Set the camera up
+        before you shoot — fixing it after costs you a re-shoot.
+      </p>
+
+      <section className="setup-card">
+        <h2 className="setup-card__title">Camera setup</h2>
+        <ol className="setup-card__list">
+          <li>
+            <span>
+              <strong>Distance.</strong>{' '}
+              <span className="muted-inline">
+                Place the camera 3–4 metres from the bike. Closer than 3 m
+                introduces lens distortion that skews joint angles; further
+                than 4 m loses landmark resolution.
+              </span>
+            </span>
+          </li>
+          <li>
+            <span>
+              <strong>Height.</strong>{' '}
+              <span className="muted-inline">
+                Lens at crank-axis (bottom bracket) level — same height as
+                the bike's centre. Do not tilt the camera up or down; keep
+                it perfectly horizontal.
+              </span>
+            </span>
+          </li>
+          <li>
+            <span>
+              <strong>Angle.</strong>{' '}
+              <span className="muted-inline">
+                Strictly side-on, drive-side facing the camera. If you can
+                see any of the opposite crank arm, the camera is not square
+                to the bike.
+              </span>
+            </span>
+          </li>
+          <li>
+            <span>
+              <strong>Positions.</strong>{' '}
+              <span className="muted-inline">
+                One photo per crank position you want to measure — 12, 3, 6
+                and 9 o'clock — plus a steady aero hold for torso, hip and
+                shoulder angles.
+              </span>
+            </span>
+          </li>
+        </ol>
+      </section>
+
       <UploadZone variant="hero" onUploaded={onUploaded} />
-      <ul className="empty-state__tips">
-        <li>📸 Use a side-on profile shot, knees facing the camera.</li>
-        <li>📐 One image per crank position (12, 3, 6 o'clock + aero).</li>
-        <li>🎯 Click a preset, then click landmarks in the prompted order.</li>
-        <li>✋ Drag any point to fine-tune; angles update live.</li>
-      </ul>
     </div>
   )
 }

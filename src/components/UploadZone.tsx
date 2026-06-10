@@ -95,20 +95,16 @@ export function UploadZone({ variant, onUploaded }: UploadZoneProps) {
       />
       {variant === 'hero' ? (
         <>
-          <div className="upload-zone__icon" aria-hidden>
-            ↑
+          <div className="upload-zone__title">
+            Drop photos here, or click to select
           </div>
-          <div className="upload-zone__title">Drop bike photos here</div>
           <div className="upload-zone__subtitle">
-            or click to browse. Side-view shots work best — one image per
-            crank position (12, 3, 6 o'clock, aero).
+            JPEG or PNG. Multiple files accepted. Each image will be stored
+            locally in this browser.
           </div>
         </>
       ) : (
-        <>
-          <span aria-hidden>+</span>
-          <span>{busy ? 'Loading…' : 'Add image'}</span>
-        </>
+        <span>{busy ? 'Loading…' : 'Add image'}</span>
       )}
       {error && <div className="upload-zone__error">{error}</div>}
     </div>

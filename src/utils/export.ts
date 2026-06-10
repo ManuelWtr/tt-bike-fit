@@ -194,30 +194,38 @@ export async function exportAnnotatedPng(img: UploadedImage): Promise<Blob> {
 
     if (Number.isFinite(degrees)) {
       const label = `${m.name}: ${formatAngle(degrees)}`
-      const padding = fontPx * 0.4
+      const padding = fontPx * 0.5
       const textWidth = ctx.measureText(label).width
       const boxX = vertex.x + fontPx * 0.8
       const boxY = vertex.y - fontPx * 0.7
-      ctx.fillStyle = 'rgba(10, 14, 26, 0.85)'
-      ctx.fillRect(
-        boxX - padding,
-        boxY - fontPx / 2 - padding / 2,
-        textWidth + padding * 2,
-        fontPx + padding,
-      )
+      const rectX = boxX - padding
+      const rectY = boxY - fontPx / 2 - padding / 2
+      const rectW = textWidth + padding * 2
+      const rectH = fontPx + padding
+      // White card with the measurement-colored border, like on the canvas.
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.96)'
+      ctx.fillRect(rectX, rectY, rectW, rectH)
+      ctx.strokeStyle = m.color
+      ctx.lineWidth = Math.max(1, lineWidth * 0.6)
+      ctx.strokeRect(rectX, rectY, rectW, rectH)
+      ctx.lineWidth = lineWidth
       ctx.fillStyle = m.color
       ctx.fillText(label, boxX, boxY)
     }
 
-    // Markers for each point.
+    // Markers for each point — dark ring + white core, matches on-screen.
     for (const p of points) {
-      ctx.fillStyle = m.color
+      ctx.fillStyle = '#1f1d1a'
       ctx.beginPath()
       ctx.arc(p.x, p.y, pointRadius, 0, Math.PI * 2)
       ctx.fill()
       ctx.strokeStyle = '#ffffff'
       ctx.lineWidth = Math.max(1, lineWidth * 0.5)
       ctx.stroke()
+      ctx.fillStyle = '#ffffff'
+      ctx.beginPath()
+      ctx.arc(p.x, p.y, pointRadius * 0.42, 0, Math.PI * 2)
+      ctx.fill()
       ctx.lineWidth = lineWidth
     }
   }

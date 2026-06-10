@@ -588,8 +588,8 @@ function AngleLabel({ x, y, text, color, fontPx }: AngleLabelProps) {
   // approximately to the text. Width estimate: 0.6 * fontPx per character.
   const charW = fontPx * 0.6
   const w = Math.max(text.length * charW, 30)
-  const h = fontPx * 1.4
-  const padX = fontPx * 0.4
+  const h = fontPx * 1.5
+  const padX = fontPx * 0.5
   return (
     <g pointerEvents="none">
       <rect
@@ -597,8 +597,10 @@ function AngleLabel({ x, y, text, color, fontPx }: AngleLabelProps) {
         y={y - h / 2}
         width={w + padX * 2}
         height={h}
-        rx={fontPx * 0.3}
-        fill="rgba(10, 14, 26, 0.85)"
+        rx={fontPx * 0.25}
+        fill="rgba(255, 255, 255, 0.96)"
+        stroke={color}
+        strokeWidth={fontPx * 0.06}
       />
       <text
         x={x}
@@ -648,26 +650,27 @@ function PointMarker({
         fill="transparent"
         style={{ cursor: 'grab' }}
       />
-      {/* Visible marker */}
+      {/* Visible marker — dark ring + light core works on light or dark photos */}
       <circle
         cx={cx}
         cy={cy}
         r={r}
-        fill="#ffffff"
-        stroke="#0a0e1a"
+        fill="#1f1d1a"
+        stroke="#ffffff"
         strokeWidth={2 * pxToImg}
       />
-      <circle cx={cx} cy={cy} r={r * 0.4} fill="#0a0e1a" />
-      {/* Label slightly above-right */}
+      <circle cx={cx} cy={cy} r={r * 0.42} fill="#ffffff" />
+      {/* Label slightly above-right — outlined for legibility on any photo */}
       <text
         x={cx + r + 4 * pxToImg}
         y={cy - r - 2 * pxToImg}
         fontSize={labelFontPx}
-        fill="#f1f5f9"
-        stroke="#0a0e1a"
+        fill="#1f1d1a"
+        stroke="#ffffff"
         strokeWidth={3 * pxToImg}
         paintOrder="stroke"
         fontFamily="system-ui, -apple-system, sans-serif"
+        fontWeight={600}
         pointerEvents="none"
       >
         {point.label}

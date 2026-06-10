@@ -31,8 +31,9 @@ export function CanvasToolbar({ imageName, controls, hint }: CanvasToolbarProps)
           disabled={!controls}
           title="Reset view"
           aria-label="Reset view"
+          style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.04em' }}
         >
-          ⌂
+          FIT
         </button>
         <button
           type="button"
