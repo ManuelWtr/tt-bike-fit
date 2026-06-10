@@ -1,17 +1,14 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// Set this to your GitHub repo name so assets resolve at
-// https://<user>.github.io/<REPO>/... when deployed to GitHub Pages.
-// If you later move to a custom (sub)domain like bikefit.mnlwtr.com, set
-// this to '/' (or remove the base option entirely).
-const GH_PAGES_BASE = '/tt-bike-fit/'
-
-export default defineConfig(({ command }) => ({
+// Custom domain bikefit.mnlwtr.com → base is '/'.
+// If you ever drop the custom domain and go back to the github.io project
+// URL, set this back to '/tt-bike-fit/'.
+export default defineConfig({
   plugins: [react()],
-  base: command === 'build' ? GH_PAGES_BASE : '/',
+  base: '/',
   server: {
     port: 5173,
     open: true,
   },
-}))
+})
