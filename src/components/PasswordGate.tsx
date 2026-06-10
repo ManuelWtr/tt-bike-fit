@@ -45,7 +45,7 @@ export function PasswordGate({ children }: { children: ReactNode }) {
   return (
     <div className="gate">
       <form className="gate__card" onSubmit={submit}>
-        <h1 className="gate__title">TT Bike Fit</h1>
+        <h1 className="gate__title">Bike Fit</h1>
         <p className="gate__sub">Private. Enter the password to continue.</p>
         <input
           type="password"
